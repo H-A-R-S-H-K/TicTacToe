@@ -44,6 +44,9 @@ public class Game {
         return board;
     }
 
+    public void printBoard() {
+        this.board.displayBoard();
+    }
     public List<Player> getPlayers() {
         return players;
     }
