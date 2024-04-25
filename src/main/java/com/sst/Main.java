@@ -21,7 +21,7 @@ public class Main {
         List<Player> players = new ArrayList<>();
         HashSet<Character> symbols = new HashSet<>();
 
-        for (int i = 1; i <= dimensions; i++) {
+        for (int i = 1; i < dimensions; i++) {
             System.out.println("Please enter Player " + i + " type: HUMAN or BOT ?");
             String type = scanner.next();
 

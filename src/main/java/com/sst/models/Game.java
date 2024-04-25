@@ -66,10 +66,11 @@ public class Game {
     private boolean validateMove(Move move) {
         int row = move.getCell().getRow();
         int col = move.getCell().getCol();
-        if (row < 0 || row == board.getSize() || col < 0 || col == board.getSize())
+
+        if (row < 0 || row >= board.getSize() || col < 0 || col >= board.getSize())
             return false;
 
-        return board.getBoard().get(row).get(col).getCellStatus() == CellStatus.FILLED;
+        return board.getBoard().get(row).get(col).getCellStatus().equals(CellStatus.EMPTY);
     }
 
     public void makeMove() {
