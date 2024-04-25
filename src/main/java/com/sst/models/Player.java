@@ -1,11 +1,12 @@
 package com.sst.models;
 
+import java.util.Scanner;
+
 public class Player {
     private String name;
     private Symbol symbol;
     private PlayerType playerType;
-    private Move move;
-
+    private final Scanner scanner = new Scanner(System.in);
 
     public Player(String name, Symbol symbol, PlayerType playerType) {
         this.name = name;
@@ -21,10 +22,6 @@ public class Player {
         return symbol;
     }
 
-    public Move getMove() {
-        return move;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -33,15 +30,22 @@ public class Player {
         this.symbol = symbol;
     }
 
-    public void setMove(Move move) {
-        this.move = move;
-    }
-
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
     }
 
     public PlayerType getPlayerType() {
         return playerType;
+    }
+
+    public Move makeMove() {
+
+        System.out.println("Please enter row where you want to make a move: ");
+        int row = scanner.nextInt();
+
+        System.out.println("Please enter col where you want to make a move: ");
+        int col = scanner.nextInt();
+
+        return new Move(new Cell(row, col), this);
     }
 }

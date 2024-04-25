@@ -55,4 +55,34 @@ public class Game {
     public int getNextPlayerMoveIndex() {
         return nextPlayerMoveIndex;
     }
+
+    private boolean validateMove(Move move) {
+        int row = move.getCell().getRow();
+        int col = move.getCell().getCol();
+        if (row < 0 || row == board.getSize() || col < 0 || col == board.getSize())
+            return false;
+
+        return board.getBoard().get(row).get(col).getCellStatus() == CellStatus.FILLED;
+    }
+
+    public void makeMove() {
+        Player currentPlayer = players.get(nextPlayerMoveIndex);
+        System.out.println("It is " + currentPlayer.getName() + "'s turn to make a move");
+
+        Move move = currentPlayer.makeMove();
+
+        while(!validateMove(move)) {
+            System.out.println("INVALID MOVE! "+ currentPlayer.getName() +" please provide a valid move.");
+            move = currentPlayer.makeMove();
+        }
+
+        int row = move.getCell().getRow();
+        int col = move.getCell().getCol();
+
+        Cell cellToChange = board.getBoard().get(row).get(col);
+        cellToChange.setPlayer(currentPlayer);
+        cellToChange.setCellStatus(CellStatus.FILLED);
+
+        nextPlayerMoveIndex = (nextPlayerMoveIndex + 1) % players.size();
+    }
 }
