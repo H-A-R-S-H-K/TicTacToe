@@ -1,5 +1,7 @@
 package com.sst.models;
 
+import java.util.List;
+
 public class Bot extends Player{
     private BotDifficultyLevel botDifficultyLevel;
 
@@ -14,5 +16,17 @@ public class Bot extends Player{
 
     public BotDifficultyLevel getBotDifficultyLevel() {
         return botDifficultyLevel;
+    }
+
+    @Override
+    public Move makeMove(Board board) {
+        for (List<Cell> row : board.getBoard()) {
+            for (Cell cell : row) {
+                if (cell.getCellStatus().equals(CellStatus.EMPTY)) {
+                    return new Move(cell, this);
+                }
+            }
+        }
+        return null;
     }
 }

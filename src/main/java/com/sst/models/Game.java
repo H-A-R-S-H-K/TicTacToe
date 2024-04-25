@@ -76,11 +76,11 @@ public class Game {
         Player currentPlayer = players.get(nextPlayerMoveIndex);
         System.out.println("It is " + currentPlayer.getName() + "'s turn to make a move");
 
-        Move move = currentPlayer.makeMove();
+        Move move = currentPlayer.makeMove(board);
 
         while(!validateMove(move)) {
             System.out.println("INVALID MOVE! "+ currentPlayer.getName() +" please provide a valid move.");
-            move = currentPlayer.makeMove();
+            move = currentPlayer.makeMove(board);
         }
 
         int row = move.getCell().getRow();
