@@ -1,5 +1,7 @@
 package com.sst.models;
 
+import com.sst.strategies.WinningAlgorithm;
+
 import java.util.List;
 
 public class Game {
@@ -8,6 +10,7 @@ public class Game {
     private GameStatus gameStatus;
     private Player winner;
     private int nextPlayerMoveIndex;
+    private WinningAlgorithm winningAlgorithm;
 
     public Game(int dimension, List<Player> players) {
         this.board = new Board(dimension);
@@ -15,6 +18,7 @@ public class Game {
         this.gameStatus = GameStatus.IN_PROGRESS;
         this.winner = null;
         this.nextPlayerMoveIndex = 0;
+        this.winningAlgorithm = new WinningAlgorithm();
     }
     public void setBoard(Board board) {
         this.board = board;
@@ -84,5 +88,10 @@ public class Game {
         cellToChange.setCellStatus(CellStatus.FILLED);
 
         nextPlayerMoveIndex = (nextPlayerMoveIndex + 1) % players.size();
+
+        if (winningAlgorithm.checkWinner(board, move)) {
+            gameStatus = GameStatus.ENDED;
+            winner = currentPlayer;
+        }
     }
 }

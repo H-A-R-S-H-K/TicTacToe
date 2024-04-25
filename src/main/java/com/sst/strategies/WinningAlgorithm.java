@@ -11,7 +11,7 @@ public class WinningAlgorithm {
     HashMap<Character, Integer> leftDiagonalMap = new HashMap<>();
     HashMap<Character, Integer> rightDiagonalMap = new HashMap<>();
 
-    public boolean checkRowOrCol(HashMap<Integer, HashMap<Character, Integer>> map, int index, Character character, Board board) {
+    private boolean checkRowOrCol(HashMap<Integer, HashMap<Character, Integer>> map, int index, Character character, Board board) {
         if (!map.containsKey(index)) {
             map.put(index, new HashMap<>());
         }
